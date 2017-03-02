@@ -1,0 +1,25 @@
+server:
+    port: 9053
+security:
+  user:
+    password: admin
+    name: admin
+ 
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:9055/uaa/oauth/token
+      userAuthorizationUri: http://localhost:9055/uaa/oauth/authorize
+      clientId: acme
+      clientSecret: acmesecret
+    resource:
+      userInfoUri: http://localhost:9055/uaa/user
+
+zuul:
+  routes:
+    resource:
+      path: /resource/**
+      url: http://localhost:9051/resource/get
+      sensitive-headers:     
+    user:
+       path: /user/**
+       url: http://localhost:9055/uaa/user
